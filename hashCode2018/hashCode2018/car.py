@@ -49,8 +49,8 @@ class Car(object):
         self.current_dest = self.current_ride.get_start()
         self.is_available = False
     
-    #this moves it ONE SPACE horizontally AND Vertically.
-    #should only move one at a time
+    #this moves it ONE SPACE horizontally or Vertically.
+    #first completes horizontal move and then vertical move.
     def move(self, current_position, current_dest): 
         cur_row = current_position[0]
         cur_col = current_position[1]
@@ -61,13 +61,16 @@ class Car(object):
         else:
             if cur_row - end_row > 0:
                 cur_row -= 1
-            else:
+            elif cur_row - end_row < 0:
                 cur_row = cur_row + 1
-            if cur_col - end_col > 0:
-                cur_col = cur_col -1
-            else:
-                cur_col = cur_col +1
-        
+            elif cur_row == end_row:
+                if cur_col - end_col > 0:
+                    cur_col = cur_col -1
+                elif cur_col - end_col < 0:
+                        cur_col = cur_col +1
+                elif cur_col == end_col:
+                    self.finishRide()
+                    
         return (cur_row, cur_col)
             
 
