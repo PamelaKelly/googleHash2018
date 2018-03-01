@@ -14,5 +14,7 @@ def main():
     bonus = program_details[4]
     steps = program_details[5]
     
-    # 
+    # STEP 2: LOOP THROUGH STEPS
+    
+    
     

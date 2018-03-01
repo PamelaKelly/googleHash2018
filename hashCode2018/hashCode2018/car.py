@@ -22,7 +22,6 @@ class car(object):
     def getAvailablity(self):
         return self.is_available()
         
-        
     def setAvailability(self, availability):
         self.is_available = availability
         
@@ -38,6 +37,13 @@ class car(object):
     def setCurrentDest(self, current_dest):
         self.current_dest = current_dest
         
-        
+    def calculateDistance(self, start, end):
+        pass
+    
+    def findRide(self, availableRides):
+        pass
+    
+    def move(self):
+        pass
     
     
