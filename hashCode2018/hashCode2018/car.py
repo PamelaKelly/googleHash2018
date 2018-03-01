@@ -38,12 +38,12 @@ class Car(object):
 
     def setCurrentDest(self, current_dest):
         self.current_dest = current_dest
-        
-    def get_assigned_rides(self):
-        return self.assigned_rides
     
-    def get_num_rides(self):
+    def getNumberRides(self):
         return self.num_rides
+
+    def getAssignedRides(self):
+        return self.assigned_rides
 
     @staticmethod
     def calculateDistance(start, end):
@@ -90,8 +90,4 @@ class Car(object):
     def finishRide(self):
         self.is_available = True
         
-    def numberRides(self):
-        return self.num_rides
 
-    def assignedRides(self):
-        return self.assigned_rides
