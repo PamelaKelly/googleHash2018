@@ -39,8 +39,9 @@ class Car(object):
     
     def setCurrentDest(self, current_dest):
         self.current_dest = current_dest
-        
-    def calculateDistance(self, start, end):
+    
+    @staticmethod
+    def calculateDistance(start, end):
         distance = abs((start[0]) - (end[0])) + abs((start[1]) - (end[1]))
         return distance
     
