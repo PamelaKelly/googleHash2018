@@ -17,17 +17,11 @@ class Car(object):
         self.is_available = True # don't need? 
         self.current_position = (0,0)
         self.current_dest = None
-<<<<<<< HEAD
         self.id = id
         self.num_rides = 0
         self.assigned_rides = []
-        
-        
-=======
         self.current_ride = None
-
-
->>>>>>> origin/master
+        
     def getAvailablity(self):
         return self.is_available()
 
@@ -51,36 +45,35 @@ class Car(object):
         return distance
 
     def findRide(self, availableRides):
-        pass
+        self.current_ride = availableRides.pop(0)
+        self.current_dest = self.current_ride.get_start()
+        self.is_available = False
     
-    #this moves it ONE SPACE horizontally AND Vertically.
-    #should only move one at a time
-    def move(self, current_position, current_dest):
+    #this moves it ONE SPACE horizontally or Vertically.
+    #first completes horizontal move and then vertical move.
+    def move(self, current_position, current_dest): 
         cur_row = current_position[0]
         cur_col = current_position[1]
         end_row = current_dest[0]
         end_col = current_dest[1]
-        if cur_row - end_row > 0:
-            cur_row = cur_row - 1
+        if current_position == current_dest:
+            self.finishRide()
         else:
-            cur_row = cur_row + 1
-        if cur_col - end_col > 0:
-            cur_col = cur_col -1
-        else:
-            cur_col = cur_col +1
-        
+            if cur_row - end_row > 0:
+                cur_row -= 1
+            elif cur_row - end_row < 0:
+                cur_row = cur_row + 1
+            elif cur_row == end_row:
+                if cur_col - end_col > 0:
+                    cur_col = cur_col -1
+                elif cur_col - end_col < 0:
+                        cur_col = cur_col +1
+                elif cur_col == end_col:
+                    self.finishRide()
+                    
         return (cur_row, cur_col)
             
-            
-            
-        self.current_ride = availableRides.pop(0)
-        self.current_dest = self.current_ride.get_start()
-        self.is_available = False
 
     def finishRide(self):
         self.is_available = True
-        self.findRide()
 
-    def move(self):
->>>>>>> ee1cdd1ff3ebb19158756ce3512bc0b80fec5bf0
-        pass
