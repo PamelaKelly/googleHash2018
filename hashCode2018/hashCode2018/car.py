@@ -38,7 +38,8 @@ class car(object):
         self.current_dest = current_dest
         
     def calculateDistance(self, start, end):
-        pass
+        distance = abs((start[0]) - (end[0])) + abs((start[1]) - (end[1]))
+        return distance
     
     def findRide(self, availableRides):
         pass
