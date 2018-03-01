@@ -1,7 +1,7 @@
 '''
 Created on 1 Mar 2018
 
-@author: katherine
+@author: team binary star
 '''
 
 class Car(object):
@@ -65,8 +65,10 @@ class Car(object):
         cur_col = current_position[1]
         end_row = current_dest[0]
         end_col = current_dest[1]
-        if current_position == current_dest:
+        if current_position == current_dest and self.is_available == False:
             self.finishRide()
+        elif current_position == current_dest and self.is_available == True:
+            self.current_dest = current_dest
         else:
             if cur_row - end_row > 0:
                 cur_row -= 1
@@ -79,7 +81,7 @@ class Car(object):
                         cur_col = cur_col +1
                 elif cur_col == end_col:
                     self.finishRide()
-                    
+                    pass    
         return (cur_row, cur_col)
             
 
