@@ -51,23 +51,19 @@ class Car(object):
         return distance
 
     def findRide(self, availableRides, stepsRemaining):
-        best_distance = -1
+        self.current_ride = None
         for i in range(len(availableRides)-1):
-            if availableRides != None:
+            if availableRides[i] != None:
                 distance = Car.calculateDistance(availableRides[i].get_start(), availableRides[i].get_end())
                 + Car.calculateDistance(self.current_position, availableRides[i].get_start())
-                if distance > best_distance and distance < stepsRemaining and distance < availableRides[i].get_latest():
+                if distance <= stepsRemaining and (distance + stepsRemaining) <= availableRides[i].get_latest():
                     best_index = i
-        if best_distance == -1:
-            self.current_ride = None
-            print("No way Jose!")
-            return False
-        else:
-            self.num_rides += 1
-            self.assigned_rides.append(best_index)
-            self.current_ride = availableRides[best_index]
-            availableRides[best_index] = None
-            self.current_dest = self.current_ride.get_start()
+                    self.num_rides += 1
+                    self.assigned_rides.append(best_index)
+                    self.current_ride = availableRides[best_index]
+                    availableRides[best_index] = None
+                    self.current_dest = self.current_ride.get_start()
+    
     
     #this moves it ONE SPACE horizontally or Vertically.
     #first completes horizontal move and then vertical move.

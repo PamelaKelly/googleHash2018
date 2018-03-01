@@ -21,7 +21,6 @@ def main():
     bonus = int(program_details[4])
     steps = int(program_details[5])
     cars = []
-    print(rides)
 
     # STEP 2: CREATE CARS
     for i in range(1, fleet_num + 1):
@@ -39,12 +38,14 @@ def main():
 
     # STEP 3: MAIN FUNCTIONALITY
     for i in range(1, steps + 1):
-        print("Step", i)
         for car in cars:
             if car.getAvailability():
                 car.findRide(rides, steps - i)
             car.move(car.getCurrentPosition(), car.getCurrentDest())
-            
+    
+    for car in cars:
+        print(car.getAssignedRides())
+        print(car.getNumberRides())       
     # STEP 4: WRITE TO FILE
     #Writer.write_file("outputs/results.out", cars)
     
