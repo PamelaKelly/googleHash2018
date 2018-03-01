@@ -38,6 +38,12 @@ class Car(object):
 
     def setCurrentDest(self, current_dest):
         self.current_dest = current_dest
+        
+    def get_assigned_rides(self):
+        return self.assigned_rides
+    
+    def get_num_rides(self):
+        return self.num_rides
 
     @staticmethod
     def calculateDistance(start, end):
@@ -45,18 +51,17 @@ class Car(object):
         return distance
 
     def findRide(self, availableRides, stepsRemaining):
-        best = availableRides[0]
-        best_index = 0
-        best_distance = Car.calculateDistance(best.get_start(), best.get_end()) 
-        + Car.calculateDistance(self.current_position, best.get_start())
+        best_distance = -1
         for i in range(len(availableRides)-1):
             distance = Car.calculateDistance(availableRides[i].get_start, availableRides[i].get_end)
             + Car.calculateDistance(self.current_position, availableRides[i].get_start())
-            if distance > best_distance and distance < stepsRemaining:
-                best = availableRides[i]
+            if distance > best_distance and distance < stepsRemaining and distance < availableRides[i].get_latest():
                 best_index = i
-        self.current_ride = availableRides.pop(best_index)
-        self.current_dest = self.current_ride.get_start()
+        if best_distance == -1:
+            return False
+        else:
+            self.current_ride = availableRides.pop(best_index)
+            self.current_dest = self.current_ride.get_start()
     
     #this moves it ONE SPACE horizontally or Vertically.
     #first completes horizontal move and then vertical move.
@@ -64,26 +69,23 @@ class Car(object):
         cur_row = current_position[0]
         cur_col = current_position[1]
         end_row = current_dest[0]
-        end_col = current_dest[1]
-        if current_position == current_dest and self.is_available == False:
-            self.finishRide()
-        elif current_position == current_dest and self.is_available == True:
-            self.current_dest = current_dest
-        else:
-            if cur_row - end_row > 0:
-                cur_row -= 1
-            elif cur_row - end_row < 0:
-                cur_row = cur_row + 1
-            elif cur_row == end_row:
-                if cur_col - end_col > 0:
-                    cur_col = cur_col -1
-                elif cur_col - end_col < 0:
-                        cur_col = cur_col +1
-                elif cur_col == end_col:
-                    self.finishRide()
-                    pass    
-        return (cur_row, cur_col)
-            
+        end_col = current_dest[1]     
+        if cur_row - end_row > 0:
+            cur_row -= 1
+        elif cur_row - end_row < 0:
+            cur_row = cur_row + 1
+        elif cur_row == end_row:
+            if cur_col - end_col > 0:
+                cur_col = cur_col -1
+            elif cur_col - end_col < 0:
+                cur_col = cur_col +1
+        self.current_position = cur_row, cur_col
+    
+    def check_idle(self):
+        return (self.current_position == self.current_destination) and (self.is_available == True)
+    
+    def check_final(self):
+        return (self.current_position == self.current_dest) and (self.is_available == False)
 
     def finishRide(self):
         self.is_available = True

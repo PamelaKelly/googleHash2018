@@ -17,3 +17,8 @@ class Ride():
 
     def get_latest(self):
         return self.__latest
+    
+    def ready(self, currentStep):
+        return self.earliest <= currentStep
+    
+    

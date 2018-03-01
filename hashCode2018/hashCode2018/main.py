@@ -29,6 +29,8 @@ def main():
 
     #Car.set_available_rides(len(rides))
 
+    #  if no cars available? 
+
     # STEP 3: MAIN FUNCTIONALITY
     for i in range(steps):
         for car in cars:
