@@ -63,6 +63,7 @@ class Car(object):
                     self.current_ride = availableRides[best_index]
                     availableRides[best_index] = None
                     self.current_dest = self.current_ride.get_start()
+                    break
     
     
     #this moves it ONE SPACE horizontally or Vertically.

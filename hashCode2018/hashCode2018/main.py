@@ -47,7 +47,7 @@ def main():
         print(car.getAssignedRides())
         print(car.getNumberRides())       
     # STEP 4: WRITE TO FILE
-    #Writer.write_file("outputs/results.out", cars)
+    Writer.write_file("outputs/b.out", cars)
     
 main()
     
