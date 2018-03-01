@@ -46,7 +46,6 @@ class car(object):
         self.current_ride = availableRides.pop(0)
         self.current_dest = self.current_ride.get_start()
         self.is_available = False
-        self.move()
 
     def finishRide(self):
         self.is_available = True
