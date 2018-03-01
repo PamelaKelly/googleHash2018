@@ -89,4 +89,9 @@ class Car(object):
 
     def finishRide(self):
         self.is_available = True
+        
+    def numberRides(self):
+        return self.num_rides
 
+    def assignedRides(self):
+        return self.assigned_rides

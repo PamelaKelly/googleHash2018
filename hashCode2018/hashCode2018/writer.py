@@ -7,7 +7,7 @@ class Writer:
             #number of car objects in list
             for car in range(0, len(carsList)):
                 #collating string of num rides + list of rides
-                output = str(car.returnNumRides()) + " " + str(car.returnAssignedRides())
+                output = str(car.numberRides()) + " " + str(car.assignedRides())
                 print >> f, output
         except IOError:
             raise
