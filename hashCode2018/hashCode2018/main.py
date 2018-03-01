@@ -1,13 +1,13 @@
-from googleHash2018.hashCode2018.hashCode2018.reader import Reader
-from googleHash2018.hashCode2018.hashCode2018.car import Car
-from googleHash2018.hashCode2018.hashCode2018.ride import Ride
-from googleHash2018.hashCode2018.hashCode2018.writer import Writer
+from hashCode2018.reader import Reader
+from hashCode2018.car import Car
+from hashCode2018.ride import Ride
+from hashCode2018.writer import Writer
 
 def main():
     """ Top level function to run the program. """
 
     #STEP 1: READ THE FILE
-    data = Reader.read_file("inputs/a_example.in")
+    data = Reader.read_file("inputs/e_high_bonus.in")
     program_details = data[0]
     rides = data[1]
     for i in range(len(rides)):
@@ -31,7 +31,6 @@ def main():
     for i in range(rides_num - 1):
         ride_details = rides[i]
         rides[i] = Ride(ride_details[0], ride_details[1], ride_details[2], ride_details[3])
-    print("hi", rides[1].start)
 
     #Car.set_available_rides(len(rides))
 
@@ -42,13 +41,9 @@ def main():
         for car in cars:
             if car.getAvailability():
                 car.findRide(rides, steps - i)
-            car.move(car.getCurrentPosition(), car.getCurrentDest())
-    
-    for car in cars:
-        print(car.getAssignedRides())
-        print(car.getNumberRides())       
+            car.move(car.getCurrentPosition(), car.getCurrentDest())     
     # STEP 4: WRITE TO FILE
-    Writer.write_file("outputs/b.out", cars)
+    Writer.write_file("outputs/e_high_bonus.out", cars)
     
 main()
     

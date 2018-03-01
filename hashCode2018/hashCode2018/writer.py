@@ -7,9 +7,10 @@ class Writer:
             #number of car objects in list
             for car in carsList:
                 #collating string of num rides + list of rides
-                output = car.getNumberRides()
+                output = str(car.getNumberRides()) + " "
                 for carRide in car.getAssignedRides():
-                    output += carRide
-                print >> f, output
+                    output += str(carRide) + " "
+                output += "\n"
+                f.write(output)
         except IOError:
             raise
