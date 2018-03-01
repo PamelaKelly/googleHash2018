@@ -1,7 +1,7 @@
-from reader import Reader
-from car import Car
-from ride import Ride
-from writer import Writer
+from googleHash2018.hashCode2018.hashCode2018.reader import Reader
+from googleHash2018.hashCode2018.hashCode2018.car import Car
+from googleHash2018.hashCode2018.hashCode2018.ride import Ride
+from googleHash2018.hashCode2018.hashCode2018.writer import Writer
 
 def main():
     """ Top level function to run the program. """
@@ -28,6 +28,7 @@ def main():
     for i in range(rides_num - 1):
         ride_details = Reader.parse_ride(rides[i])
         rides[i] = Ride(ride_details[0], ride_details[1], ride_details[2], ride_details[3])
+    print("hi", rides[1].start)
 
     #Car.set_available_rides(len(rides))
 
