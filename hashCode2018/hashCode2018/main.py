@@ -1,4 +1,6 @@
 from hashCode2018.reader import Reader
+from hashCode2018.car import Car
+from hashCode2018.ride import Ride
 def main():
     """ Top level function to run the program. """
     
@@ -13,8 +15,23 @@ def main():
     rides_num = program_details[3]
     bonus = program_details[4]
     steps = program_details[5]
+    cars = []
     
-    # STEP 2: LOOP THROUGH STEPS
+    # STEP 2: CREATE CARS
+    for i in range(1, fleet_num + 1):
+        car = Car(i)
+        cars.append(car)
+        
+    # STEP 3: CREATE RIDES & AVAILABLE RIDES
+    for i in range(rides_num - 1):
+        ride_details = Reader.parse_ride(rides[i])
+        rides[i] = Ride(ride_details)
+
+    #Car.set_available_rides(len(rides))
+    
+    # STEP 3: MAIN FUNCTIONALITY
+    
+    
     
     
     

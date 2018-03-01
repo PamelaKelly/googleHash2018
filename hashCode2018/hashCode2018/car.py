@@ -4,22 +4,30 @@ Created on 1 Mar 2018
 @author: katherine
 '''
 
-class car(object):
+class Car(object):
     '''
     classdocs
     '''
 
 
-    def __init__(self):
+    def __init__(self, id):
         '''
         Constructor
         '''
-        self.is_available = True
+        self.is_available = True # don't need? 
         self.current_position = (0,0)
         self.current_dest = None
+<<<<<<< HEAD
+        self.id = id
+        self.num_rides = 0
+        self.assigned_rides = []
+        
+        
+=======
         self.current_ride = None
 
 
+>>>>>>> origin/master
     def getAvailablity(self):
         return self.is_available()
 

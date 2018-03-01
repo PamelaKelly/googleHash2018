@@ -13,3 +13,8 @@ class Reader:
                 return problem_data, rides
         except IOError:
             raise
+        
+    @staticmethod
+    def parse_ride(ride_string):
+        ride = ride_string.split()
+        return [(ride[0], ride[1]), (ride[2], ride[3]), ride[4], ride[5]]
