@@ -59,6 +59,8 @@ class Car(object):
                 if distance > best_distance and distance < stepsRemaining and distance < availableRides[i].get_latest():
                     best_index = i
         if best_distance == -1:
+            self.current_ride = None
+            print("No way Jose!")
             return False
         else:
             self.num_rides += 1
@@ -70,20 +72,21 @@ class Car(object):
     #this moves it ONE SPACE horizontally or Vertically.
     #first completes horizontal move and then vertical move.
     def move(self, current_position, current_dest): 
-        cur_row = current_position[0]
-        cur_col = current_position[1]
-        end_row = current_dest[0]
-        end_col = current_dest[1]     
-        if cur_row - end_row > 0:
-            cur_row -= 1
-        elif cur_row - end_row < 0:
-            cur_row = cur_row + 1
-        elif cur_row == end_row:
-            if cur_col - end_col > 0:
-                cur_col = cur_col -1
-            elif cur_col - end_col < 0:
-                cur_col = cur_col +1
-        self.current_position = cur_row, cur_col
+        if self.current_ride != None:
+            cur_row = current_position[0]
+            cur_col = current_position[1]
+            end_row = current_dest[0]
+            end_col = current_dest[1]     
+            if cur_row - end_row > 0:
+                cur_row -= 1
+            elif cur_row - end_row < 0:
+                cur_row = cur_row + 1
+            elif cur_row == end_row:
+                if cur_col - end_col > 0:
+                    cur_col = cur_col -1
+                elif cur_col - end_col < 0:
+                    cur_col = cur_col +1
+            self.current_position = cur_row, cur_col
     
     def check_idle(self):
         return (self.current_position == self.current_destination) and (self.is_available == True)

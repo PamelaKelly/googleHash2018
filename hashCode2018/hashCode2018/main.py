@@ -10,6 +10,9 @@ def main():
     data = Reader.read_file("inputs/a_example.in")
     program_details = data[0]
     rides = data[1]
+    for i in range(len(rides)):
+        ride = rides[i]
+        rides[i] = Reader.parse_ride(ride)
     # details
     rows = int(program_details[0])
     columns = int(program_details[1])
@@ -18,6 +21,7 @@ def main():
     bonus = int(program_details[4])
     steps = int(program_details[5])
     cars = []
+    print(rides)
 
     # STEP 2: CREATE CARS
     for i in range(1, fleet_num + 1):
@@ -26,7 +30,7 @@ def main():
 
     # STEP 3: CREATE RIDES & AVAILABLE RIDES
     for i in range(rides_num - 1):
-        ride_details = Reader.parse_ride(rides[i])
+        ride_details = rides[i]
         rides[i] = Ride(ride_details[0], ride_details[1], ride_details[2], ride_details[3])
     print("hi", rides[1].start)
 
@@ -36,13 +40,14 @@ def main():
 
     # STEP 3: MAIN FUNCTIONALITY
     for i in range(1, steps + 1):
+        print("Step", i)
         for car in cars:
             if car.getAvailability():
                 car.findRide(rides, steps - i)
             car.move(car.getCurrentPosition(), car.getCurrentDest())
             
     # STEP 4: WRITE TO FILE
-    
+    #Writer.write_file("outputs/results.out", cars)
     
 main()
     
