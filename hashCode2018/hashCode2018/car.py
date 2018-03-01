@@ -1,14 +1,13 @@
 '''
 Created on 1 Mar 2018
 
-@author: katherine
+@author: team binary star
 '''
 
 class Car(object):
     '''
     classdocs
     '''
-
 
     def __init__(self, id):
         '''
@@ -40,14 +39,24 @@ class Car(object):
     def setCurrentDest(self, current_dest):
         self.current_dest = current_dest
 
-    def calculateDistance(self, start, end):
+    @staticmethod
+    def calculateDistance(start, end):
         distance = abs((start[0]) - (end[0])) + abs((start[1]) - (end[1]))
         return distance
 
-    def findRide(self, availableRides):
-        self.current_ride = availableRides.pop(0)
+    def findRide(self, availableRides, stepsRemaining):
+        best = availableRides[0]
+        best_index = 0
+        best_distance = Car.calculateDistance(best.get_start(), best.get_end()) 
+        + Car.calculateDistance(self.current_position, best.get_start())
+        for i in range(len(availableRides)-1):
+            distance = Car.calculateDistance(availableRides[i].get_start, availableRides[i].get_end)
+            + Car.calculateDistance(self.current_position, availableRides[i].get_start())
+            if distance > best_distance and distance < stepsRemaining:
+                best = availableRides[i]
+                best_index = i
+        self.current_ride = availableRides.pop(best_index)
         self.current_dest = self.current_ride.get_start()
-        self.is_available = False
     
     #this moves it ONE SPACE horizontally or Vertically.
     #first completes horizontal move and then vertical move.
@@ -56,8 +65,10 @@ class Car(object):
         cur_col = current_position[1]
         end_row = current_dest[0]
         end_col = current_dest[1]
-        if current_position == current_dest:
+        if current_position == current_dest and self.is_available == False:
             self.finishRide()
+        elif current_position == current_dest and self.is_available == True:
+            self.current_dest = current_dest
         else:
             if cur_row - end_row > 0:
                 cur_row -= 1
@@ -70,7 +81,7 @@ class Car(object):
                         cur_col = cur_col +1
                 elif cur_col == end_col:
                     self.finishRide()
-                    
+                    pass    
         return (cur_row, cur_col)
             
 
