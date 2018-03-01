@@ -5,9 +5,11 @@ class Writer:
         try:
             f = open(outputfile, 'w')
             #number of car objects in list
-            for car in range(0, len(carsList)):
+            for car in carsList:
                 #collating string of num rides + list of rides
-                output = str(car.getNumberRides()) + " " + str(car.getAssignedRides())
+                output = car.getNumberRides()
+                for carRide in car.getAssignedRides():
+                    output += carRide
                 print >> f, output
         except IOError:
             raise
