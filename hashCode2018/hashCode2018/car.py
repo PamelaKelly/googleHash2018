@@ -44,7 +44,27 @@ class car(object):
     def findRide(self, availableRides):
         pass
     
-    def move(self):
+    #this moves it ONE SPACE horizontally AND Vertically.
+    #should only move one at a time
+    def move(self, current_position, current_dest):
+        cur_row = current_position[0]
+        cur_col = current_position[1]
+        end_row = current_dest[0]
+        end_col = current_dest[1]
+        if cur_row - end_row > 0:
+            cur_row = cur_row - 1
+        else:
+            cur_row = cur_row + 1
+        if cur_col - end_col > 0:
+            cur_col = cur_col -1
+        else:
+            cur_col = cur_col +1
+        
+        return (cur_row, cur_col)
+            
+            
+            
+        
         pass
     
     
