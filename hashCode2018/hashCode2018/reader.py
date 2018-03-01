@@ -17,4 +17,4 @@ class Reader:
     @staticmethod
     def parse_ride(ride_string):
         ride = ride_string.split()
-        return [(ride[0], ride[1]), (ride[2], ride[3]), ride[4], ride[5]]
+        return [(int(ride[0]), int(ride[1])), (int(ride[2]), int(ride[3])), int(ride[4]), int(ride[5])]

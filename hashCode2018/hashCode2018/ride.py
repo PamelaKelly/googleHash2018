@@ -7,16 +7,16 @@ class Ride():
         self.latest = in_latest
 
     def get_start(self):
-        return self.__start
+        return self.start
 
     def get_end(self):
-        return self.__end
+        return self.end
 
     def get_earliest(self):
-        return self.__earliest
+        return self.earliest
 
     def get_latest(self):
-        return self.__latest
+        return self.latest
     
     def ready(self, currentStep):
         return self.earliest <= currentStep

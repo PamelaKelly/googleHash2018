@@ -21,8 +21,8 @@ class Car(object):
         self.assigned_rides = []
         self.current_ride = None
         
-    def getAvailablity(self):
-        return self.is_available()
+    def getAvailability(self):
+        return self.is_available
 
     def setAvailability(self, availability):
         self.is_available = availability
@@ -53,14 +53,18 @@ class Car(object):
     def findRide(self, availableRides, stepsRemaining):
         best_distance = -1
         for i in range(len(availableRides)-1):
-            distance = Car.calculateDistance(availableRides[i].get_start, availableRides[i].get_end)
-            + Car.calculateDistance(self.current_position, availableRides[i].get_start())
-            if distance > best_distance and distance < stepsRemaining and distance < availableRides[i].get_latest():
-                best_index = i
+            if availableRides != None:
+                distance = Car.calculateDistance(availableRides[i].get_start(), availableRides[i].get_end())
+                + Car.calculateDistance(self.current_position, availableRides[i].get_start())
+                if distance > best_distance and distance < stepsRemaining and distance < availableRides[i].get_latest():
+                    best_index = i
         if best_distance == -1:
             return False
         else:
-            self.current_ride = availableRides.pop(best_index)
+            self.num_rides += 1
+            self.assigned_rides.append(best_index)
+            self.current_ride = availableRides[best_index]
+            availableRides[best_index] = None
             self.current_dest = self.current_ride.get_start()
     
     #this moves it ONE SPACE horizontally or Vertically.

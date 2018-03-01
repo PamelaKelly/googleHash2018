@@ -1,20 +1,22 @@
-from hashCode2018.reader import Reader
-from hashCode2018.car import Car
-from hashCode2018.ride import Ride
+from reader import Reader
+from car import Car
+from ride import Ride
+from writer import Writer
+
 def main():
     """ Top level function to run the program. """
 
     #STEP 1: READ THE FILE
-    data = Reader.read_file("#")
+    data = Reader.read_file("inputs/a_example.in")
     program_details = data[0]
     rides = data[1]
     # details
-    rows = program_details[0]
-    columns = program_details[1]
-    fleet_num = program_details[2]
-    rides_num = program_details[3]
-    bonus = program_details[4]
-    steps = program_details[5]
+    rows = int(program_details[0])
+    columns = int(program_details[1])
+    fleet_num = int(program_details[2])
+    rides_num = int(program_details[3])
+    bonus = int(program_details[4])
+    steps = int(program_details[5])
     cars = []
 
     # STEP 2: CREATE CARS
@@ -25,15 +27,22 @@ def main():
     # STEP 3: CREATE RIDES & AVAILABLE RIDES
     for i in range(rides_num - 1):
         ride_details = Reader.parse_ride(rides[i])
-        rides[i] = Ride(ride_details)
+        rides[i] = Ride(ride_details[0], ride_details[1], ride_details[2], ride_details[3])
 
     #Car.set_available_rides(len(rides))
 
     #  if no cars available? 
 
     # STEP 3: MAIN FUNCTIONALITY
-    for i in range(steps):
+    for i in range(1, steps + 1):
         for car in cars:
-            if car.is_available:
-                car.findRide(rides)
-            car.move()
+            if car.getAvailability():
+                car.findRide(rides, steps - i)
+            car.move(car.getCurrentPosition(), car.getCurrentDest())
+            
+    # STEP 4: WRITE TO FILE
+    
+    
+main()
+    
+    
