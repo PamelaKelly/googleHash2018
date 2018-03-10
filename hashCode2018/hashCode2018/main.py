@@ -7,7 +7,7 @@ def main():
     """ Top level function to run the program. """
 
     #STEP 1: READ THE FILE
-    data = Reader.read_file("inputs/e_high_bonus.in")
+    data = Reader.read_file("inputs/c_no_hurry.in")
     program_details = data[0]
     rides = data[1]
     for i in range(len(rides)):
@@ -40,10 +40,10 @@ def main():
     for i in range(1, steps + 1):
         for car in cars:
             if car.getAvailability():
-                car.findRide(rides, steps - i)
+                car.findRide(rides, i, steps)
             car.move(car.getCurrentPosition(), car.getCurrentDest())     
     # STEP 4: WRITE TO FILE
-    Writer.write_file("outputs/e_high_bonus.out", cars)
+    Writer.write_file("outputs/c.out", cars)
     
 main()
     

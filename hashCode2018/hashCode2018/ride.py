@@ -1,3 +1,4 @@
+from car import Car
 class Ride():
 
     def __init__(self, in_start, in_end, in_earliest, in_latest):
@@ -5,6 +6,7 @@ class Ride():
         self.end = in_end
         self.earliest = in_earliest
         self.latest = in_latest
+        self.ride_length = Car.calculateDistance(self.start, self.end)
 
     def get_start(self):
         return self.start
